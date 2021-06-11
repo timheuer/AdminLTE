@@ -394,13 +394,13 @@ if($auth) {
             <?php
             if($scriptname === "groups-domains.php" && isset($_GET['type']))
             {
-                if($_GET["type"] === "white")
+                if($_GET["type"] === "allow")
                 {
-                    $scriptname = "whitelist";
+                    $scriptname = "allowlist";
                 }
-                elseif($_GET["type"] === "black")
+                elseif($_GET["type"] === "deny")
                 {
-                    $scriptname = "blacklist";
+                    $scriptname = "denylist";
                 }
             }
             if(!$auth && (!isset($indexpage) || isset($_GET['login'])))
@@ -448,16 +448,16 @@ if($auth) {
                     </li>
                   </ul>
                 </li>
-                <!-- Whitelist -->
-                <li<?php if($scriptname === "whitelist"){ ?> class="active"<?php } ?>>
-                    <a href="groups-domains.php?type=white">
-                        <i class="fa fa-fw fa-check-circle "></i> <span>Whitelist</span>
+                <!-- Allowlist -->
+                <li<?php if($scriptname === "allowlist"){ ?> class="active"<?php } ?>>
+                    <a href="groups-domains.php?type=allow">
+                        <i class="fa fa-fw fa-check-circle "></i> <span>Allowlist</span>
                     </a>
                 </li>
-                <!-- Blacklist -->
-                <li<?php if($scriptname === "blacklist"){ ?> class="active"<?php } ?>>
-                    <a href="groups-domains.php?type=black">
-                        <i class="fa fa-fw fa-ban"></i> <span>Blacklist</span>
+                <!-- Denylist -->
+                <li<?php if($scriptname === "denylist"){ ?> class="active"<?php } ?>>
+                    <a href="groups-domains.php?type=deny">
+                        <i class="fa fa-fw fa-ban"></i> <span>Denylist</span>
                     </a>
                 </li>
                 <!-- Group Management -->

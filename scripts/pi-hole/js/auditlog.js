@@ -33,7 +33,7 @@ function updateTopLists() {
             "</td> <td>" +
             data.top_queries[domain] +
             "</td> <td>" +
-            '<button type="button" class="btn btn-default btn-xs text-red"><i class="fa fa-ban"></i> Blacklist</button>' +
+            '<button type="button" class="btn btn-default btn-xs text-red"><i class="fa fa-ban"></i> Denylist</button>' +
             '<button type="button" class="btn btn-default btn-xs text-orange"><i class="fa fa-balance-scale"></i> Audit</button>' +
             "</td> </tr> "
         );
@@ -69,7 +69,7 @@ function updateTopLists() {
               "</td> <td>" +
               data.top_ads[domain] +
               "</td> <td>" +
-              '<button type="button" class="btn btn-default btn-xs text-green"><i class="fas fa-check"></i> Whitelist</button>' +
+              '<button type="button" class="btn btn-default btn-xs text-green"><i class="fas fa-check"></i> Allowlist</button>' +
               '<button type="button" class="btn btn-default btn-xs text-orange"><i class="fa fa-balance-scale"></i> Audit</button>' +
               "</td> </tr> "
           );
@@ -111,15 +111,15 @@ function add(domain, list) {
   });
 }
 
-function blacklistUrl(url) {
+function denylistUrl(url) {
   // We add to audit last as it will reload the table on success
-  add(url, "black");
+  add(url, "deny");
   add(url, "audit");
 }
 
-function whitelistUrl(url) {
+function allowlistUrl(url) {
   // We add to audit last as it will reload the table on success
-  add(url, "white");
+  add(url, "allow");
   add(url, "audit");
 }
 
@@ -134,8 +134,8 @@ $(function () {
   $("#domain-frequency tbody").on("click", "button", function (event) {
     var url = $(this).parents("tr")[0].textContent.split(" ")[0];
 
-    if (event.target.textContent.trim() === "Blacklist") {
-      blacklistUrl(url);
+    if (event.target.textContent.trim() === "Denylist") {
+      denylistUrl(url);
     } else {
       auditUrl(url);
     }
@@ -144,8 +144,8 @@ $(function () {
   $("#ad-frequency tbody").on("click", "button", function (event) {
     var url = $(this).parents("tr")[0].textContent.split(" ")[0];
 
-    if (event.target.textContent.trim() === "Whitelist") {
-      whitelistUrl(url);
+    if (event.target.textContent.trim() === "Allowlist") {
+      allowlistUrl(url);
     } else {
       auditUrl(url);
     }

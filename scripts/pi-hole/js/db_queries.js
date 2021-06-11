@@ -109,7 +109,7 @@ function getQueryTypes() {
     queryType.push(4);
   }
 
-  if ($("#type_blacklist").prop("checked")) {
+  if ($("#type_denylist").prop("checked")) {
     queryType.push(5);
   }
 
@@ -127,7 +127,7 @@ function getQueryTypes() {
     queryType.push(10);
   }
 
-  if ($("#type_blacklist_CNAME").prop("checked")) {
+  if ($("#type_denylist_CNAME").prop("checked")) {
     queryType.push(11);
   }
 
@@ -200,7 +200,7 @@ $(function () {
           color = "red";
           fieldtext = "Blocked (gravity)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case 2:
           color = "green";
@@ -209,25 +209,25 @@ $(function () {
             (data.length > 5 && data[5] !== "N/A" ? data[5] : "") +
             ")";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Blacklist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Denylist</button>';
           break;
         case 3:
           color = "green";
           fieldtext = "OK <br class='hidden-lg'>(cached)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Blacklist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Denylist</button>';
           break;
         case 4:
           color = "red";
-          fieldtext = "Blocked <br class='hidden-lg'>(regex blacklist)";
+          fieldtext = "Blocked <br class='hidden-lg'>(regex denylist)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case 5:
           color = "red";
-          fieldtext = "Blocked <br class='hidden-lg'>(exact blacklist)";
+          fieldtext = "Blocked <br class='hidden-lg'>(exact denylist)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case 6:
           color = "red";
@@ -248,19 +248,19 @@ $(function () {
           color = "red";
           fieldtext = "Blocked (gravity, CNAME)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case 10:
           color = "red";
-          fieldtext = "Blocked <br class='hidden-lg'>(regex blacklist, CNAME)";
+          fieldtext = "Blocked <br class='hidden-lg'>(regex denylist, CNAME)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case 11:
           color = "red";
-          fieldtext = "Blocked <br class='hidden-lg'>(exact blacklist, CNAME)";
+          fieldtext = "Blocked <br class='hidden-lg'>(exact denylist, CNAME)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case 12:
           color = "green";
@@ -276,10 +276,10 @@ $(function () {
           color = "green";
           fieldtext = "OK <br class='hidden-lg'>(already forwarded)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Blacklist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Denylist</button>';
           break;
         default:
-          color = "black";
+          color = "deny";
           fieldtext = "Unknown";
           buttontext = "";
       }
@@ -351,9 +351,9 @@ $(function () {
   $("#all-queries tbody").on("click", "button", function () {
     var data = tableApi.row($(this).parents("tr")).data();
     if ([1, 4, 5, 9, 10, 11].indexOf(data[4]) !== -1) {
-      utils.addFromQueryLog(data[2], "white");
+      utils.addFromQueryLog(data[2], "allow");
     } else {
-      utils.addFromQueryLog(data[2], "black");
+      utils.addFromQueryLog(data[2], "deny");
     }
   });
 

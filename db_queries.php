@@ -52,13 +52,13 @@
             <div><input type="checkbox" id="type_external" checked><label for="type_external">Blocked: external</label></div>
         </div>
         <div class="col-md-3">
-            <div><input type="checkbox" id="type_blacklist" checked><label for="type_blacklist">Blocked: exact blacklist</label><br></div>
-            <div><input type="checkbox" id="type_regex" checked><label for="type_regex">Blocked: regex blacklist</label></div>
+            <div><input type="checkbox" id="type_denylist" checked><label for="type_denylist">Blocked: exact denylist</label><br></div>
+            <div><input type="checkbox" id="type_regex" checked><label for="type_regex">Blocked: regex denylist</label></div>
         </div>
         <div class="col-md-3">
             <div><input type="checkbox" id="type_gravity_CNAME" checked><label for="type_gravity_CNAME">Blocked: gravity (CNAME)</label><br></div>
-            <div><input type="checkbox" id="type_blacklist_CNAME" checked><label for="type_blacklist_CNAME">Blocked: exact blacklist (CNAME)</label><br></div>
-            <div><input type="checkbox" id="type_regex_CNAME" checked><label for="type_regex_CNAME">Blocked: regex blacklist (CNAME)</label></div>
+            <div><input type="checkbox" id="type_denylist_CNAME" checked><label for="type_denylist_CNAME">Blocked: exact denylist (CNAME)</label><br></div>
+            <div><input type="checkbox" id="type_regex_CNAME" checked><label for="type_regex_CNAME">Blocked: regex denylist (CNAME)</label></div>
         </div>
     </div>
 </div>

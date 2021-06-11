@@ -88,7 +88,7 @@ function SQLite3_connect($filename, $mode=SQLITE3_OPEN_READONLY)
  * @param $domains array Array of domains (strings) to be added to the table
  * @param $wildcardstyle boolean Whether to format the input domains in legacy wildcard notation
  * @param $returnnum boolean Whether to return an integer or a string
- * @param $type integer The target type (0 = exact whitelist, 1 = exact blacklist, 2 = regex whitelist, 3 = regex blacklist)
+ * @param $type integer The target type (0 = exact allowlist, 1 = exact denylist, 2 = regex allowlist, 3 = regex denylist)
  * @return string Success/error and number of processed domains
  */
 function add_to_table($db, $table, $domains, $comment=null, $wildcardstyle=false, $returnnum=false, $type=-1)
@@ -221,7 +221,7 @@ function add_to_table($db, $table, $domains, $comment=null, $wildcardstyle=false
  * @param $table string The target table
  * @param $domains array Array of domains (strings) to be removed from the table
  * @param $returnnum boolean Whether to return an integer or a string
- * @param $type integer The target type (0 = exact whitelist, 1 = exact blacklist, 2 = regex whitelist, 3 = regex blacklist)
+ * @param $type integer The target type (0 = exact allowlist, 1 = exact denylist, 2 = regex allowlist, 3 = regex denylist)
  * @return string Success/error and number of processed domains
  */
 function remove_from_table($db, $table, $domains, $returnnum=false, $type=-1)
@@ -313,9 +313,9 @@ function remove_from_table($db, $table, $domains, $returnnum=false, $type=-1)
 
 if (!class_exists("ListType")) {
 	class ListType{
-		const whitelist = 0;
-		const blacklist = 1;
-		const regex_whitelist = 2;
-		const regex_blacklist = 3;
+		const allowlist = 0;
+		const denylist = 1;
+		const regex_allowlist = 2;
+		const regex_denylist = 3;
 	}
 }

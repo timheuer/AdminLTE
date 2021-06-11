@@ -109,7 +109,7 @@ $(function () {
           colorClass = "text-red";
           fieldtext = "Blocked (gravity)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case "2":
           colorClass = "text-green";
@@ -119,30 +119,30 @@ $(function () {
             ")" +
             dnssecStatus;
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Blacklist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Denylist</button>';
           break;
         case "3":
           colorClass = "text-green";
           fieldtext = "OK <br class='hidden-lg'>(cached)" + dnssecStatus;
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Blacklist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Denylist</button>';
           break;
         case "4":
           colorClass = "text-red";
-          fieldtext = "Blocked <br class='hidden-lg'>(regex blacklist)";
+          fieldtext = "Blocked <br class='hidden-lg'>(regex denylist)";
 
           if (data.length > 9 && data[9] > 0) {
             regexLink = true;
           }
 
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case "5":
           colorClass = "text-red";
-          fieldtext = "Blocked <br class='hidden-lg'>(exact blacklist)";
+          fieldtext = "Blocked <br class='hidden-lg'>(exact denylist)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           break;
         case "6":
           colorClass = "text-red";
@@ -163,26 +163,26 @@ $(function () {
           colorClass = "text-red";
           fieldtext = "Blocked (gravity, CNAME)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           isCNAME = true;
           break;
         case "10":
           colorClass = "text-red";
-          fieldtext = "Blocked <br class='hidden-lg'>(regex blacklist, CNAME)";
+          fieldtext = "Blocked <br class='hidden-lg'>(regex denylist, CNAME)";
 
           if (data.length > 9 && data[9] > 0) {
             regexLink = true;
           }
 
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           isCNAME = true;
           break;
         case "11":
           colorClass = "text-red";
-          fieldtext = "Blocked <br class='hidden-lg'>(exact blacklist, CNAME)";
+          fieldtext = "Blocked <br class='hidden-lg'>(exact denylist, CNAME)";
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Whitelist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-green"><i class="fas fa-check"></i> Allowlist</button>';
           isCNAME = true;
           break;
         case "12":
@@ -199,7 +199,7 @@ $(function () {
           colorClass = "text-green";
           fieldtext = "OK <br class='hidden-lg'>(already forwarded)" + dnssecStatus;
           buttontext =
-            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Blacklist</button>';
+            '<button type="button" class="btn btn-default btn-sm text-red"><i class="fa fa-ban"></i> Denylist</button>';
           break;
         default:
           colorClass = false;
@@ -424,9 +424,9 @@ $(function () {
   $("#all-queries tbody").on("click", "button", function () {
     var data = tableApi.row($(this).parents("tr")).data();
     if (data[4] === "2" || data[4] === "3") {
-      utils.addFromQueryLog(data[2], "black");
+      utils.addFromQueryLog(data[2], "deny");
     } else {
-      utils.addFromQueryLog(data[2], "white");
+      utils.addFromQueryLog(data[2], "allow");
     }
   });
 

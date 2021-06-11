@@ -120,21 +120,21 @@ elseif (isset($_GET['list']))
 		die("List has not been specified.");
 
 	switch ($_GET["list"]) {
-		case 'black':
-			$_POST['type'] = ListType::blacklist;
+		case 'deny':
+			$_POST['type'] = ListType::denylist;
 			break;
-		case 'regex_black':
-			$_POST['type'] = ListType::regex_blacklist;
+		case 'regex_deny':
+			$_POST['type'] = ListType::regex_denylist;
 			break;
-		case 'white':
-			$_POST['type'] = ListType::whitelist;
+		case 'allow':
+			$_POST['type'] = ListType::allowlist;
 			break;
-		case 'regex_white':
-			$_POST['type'] = ListType::regex_whitelist;
+		case 'regex_allow':
+			$_POST['type'] = ListType::regex_allowlist;
 			break;
 
 		default:
-			die("Invalid list [supported: black, regex_black, white, regex_white]");
+			die("Invalid list [supported: deny, regex_deny, allow, regex_allow]");
 	}
 
 	if (isset($_GET['add']))

@@ -455,9 +455,9 @@ if ($_POST['action'] == 'get_groups') {
     // List all available groups
     try {
         $limit = "";
-        if (isset($_POST["showtype"]) && $_POST["showtype"] === "white"){
+        if (isset($_POST["showtype"]) && $_POST["showtype"] === "allow"){
             $limit = " WHERE type = 0 OR type = 2";
-        } elseif (isset($_POST["showtype"]) && $_POST["showtype"] === "black"){
+        } elseif (isset($_POST["showtype"]) && $_POST["showtype"] === "deny"){
             $limit = " WHERE type = 1 OR type = 3";
         } elseif (isset($_POST["type"]) && is_numeric($_POST["type"])){
             $limit = " WHERE type = " . $_POST["type"];
@@ -480,8 +480,8 @@ if ($_POST['action'] == 'get_groups') {
             }
             $res['groups'] = $groups;
             if (extension_loaded("intl") &&
-                ($res['type'] === ListType::whitelist ||
-                 $res['type'] === ListType::blacklist) ) {
+                ($res['type'] === ListType::allowlist ||
+                 $res['type'] === ListType::denylist) ) {
 
                 // Try to convert possible IDNA domain to Unicode, we try the UTS #46 standard first
                 // as this is the new default, see https://sourceforge.net/p/icu/mailman/message/32980778/
@@ -557,10 +557,10 @@ if ($_POST['action'] == 'get_groups') {
 
         if (isset($_POST['type'])) {
             $type = intval($_POST['type']);
-        } else if (isset($_POST['list']) && $_POST['list'] === "white") {
-            $type = ListType::whitelist;
-        } else if (isset($_POST['list']) && $_POST['list'] === "black") {
-            $type = ListType::blacklist;
+        } else if (isset($_POST['list']) && $_POST['list'] === "allow") {
+            $type = ListType::allowlist;
+        } else if (isset($_POST['list']) && $_POST['list'] === "deny") {
+            $type = ListType::denylist;
         }
 
         if (!$insert_stmt->bindValue(':type', $type, SQLITE3_TEXT) ||
@@ -606,7 +606,7 @@ if ($_POST['action'] == 'get_groups') {
                 $domain = "(\\.|^)".str_replace(".","\\.",$domain)."$";
             }
 
-            if($type === ListType::whitelist || $type === ListType::blacklist)
+            if($type === ListType::allowlist || $type === ListType::denylist)
             {
                 // If adding to the exact lists, we convert the domain lower case and check whether it is valid
                 $domain = strtolower($domain);

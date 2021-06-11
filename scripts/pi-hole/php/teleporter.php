@@ -142,13 +142,13 @@ function archive_restore_table($file, $table, $flush=false)
 	}
 	else
 	{
-		if($table === "whitelist")
+		if($table === "allowlist")
 			$type = 0;
-		elseif($table === "blacklist")
+		elseif($table === "denylist")
 			$type = 1;
-		elseif($table === "regex_whitelist")
+		elseif($table === "regex_allowlist")
 			$type = 2;
-		elseif($table === "regex_blacklist")
+		elseif($table === "regex_denylist")
 			$type = 3;
 
 		$sql  = "INSERT OR IGNORE INTO domainlist";
@@ -240,15 +240,15 @@ function archive_insert_into_table($file, $table, $flush=false, $wildcardstyle=f
 
 	// Determine table and type to import to
 	$type = null;
-	if($table === "whitelist") {
+	if($table === "allowlist") {
 		$table = "domainlist";
-		$type = ListType::whitelist;
-	} else if($table === "blacklist") {
+		$type = ListType::allowlist;
+	} else if($table === "denylist") {
 		$table = "domainlist";
-		$type = ListType::blacklist;
-	} else if($table === "regex_blacklist") {
+		$type = ListType::denylist;
+	} else if($table === "regex_denylist") {
 		$table = "domainlist";
-		$type = ListType::regex_blacklist;
+		$type = ListType::regex_denylist;
 	} else if($table === "domain_audit") {
 		$table = "domain_audit";
 		$type = -1; // -1 -> not used inside add_to_table()
@@ -357,32 +357,32 @@ if(isset($_POST["action"]))
 
 		foreach(new RecursiveIteratorIterator($archive) as $file)
 		{
-			if(isset($_POST["blacklist"]) && $file->getFilename() === "blacklist.txt")
+			if(isset($_POST["denylist"]) && $file->getFilename() === "denylist.txt")
 			{
-				$num = archive_insert_into_table($file, "blacklist", $flushtables);
-				echo "Processed blacklist (exact) (".$num." entries)<br>\n";
+				$num = archive_insert_into_table($file, "denylist", $flushtables);
+				echo "Processed denylist (exact) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
-			if(isset($_POST["whitelist"]) && $file->getFilename() === "whitelist.txt")
+			if(isset($_POST["allowlist"]) && $file->getFilename() === "allowlist.txt")
 			{
-				$num = archive_insert_into_table($file, "whitelist", $flushtables);
-				echo "Processed whitelist (exact) (".$num." entries)<br>\n";
+				$num = archive_insert_into_table($file, "allowlist", $flushtables);
+				echo "Processed allowlist (exact) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
 			if(isset($_POST["regexlist"]) && $file->getFilename() === "regex.list")
 			{
-				$num = archive_insert_into_table($file, "regex_blacklist", $flushtables);
-				echo "Processed blacklist (regex) (".$num." entries)<br>\n";
+				$num = archive_insert_into_table($file, "regex_denylist", $flushtables);
+				echo "Processed denylist (regex) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
 			// Also try to import legacy wildcard list if found
 			if(isset($_POST["regexlist"]) && $file->getFilename() === "wildcardblocking.txt")
 			{
-				$num = archive_insert_into_table($file, "regex_blacklist", $flushtables, true);
-				echo "Processed blacklist (regex, wildcard style) (".$num." entries)<br>\n";
+				$num = archive_insert_into_table($file, "regex_denylist", $flushtables, true);
+				echo "Processed denylist (regex, wildcard style) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
@@ -400,31 +400,31 @@ if(isset($_POST["action"]))
 				$importedsomething = true;
 			}
 
-			if(isset($_POST["blacklist"]) && $file->getFilename() === "blacklist.exact.json")
+			if(isset($_POST["denylist"]) && $file->getFilename() === "denylist.exact.json")
 			{
-				$num = archive_restore_table($file, "blacklist", $flushtables);
-				echo "Processed blacklist (exact) (".$num." entries)<br>\n";
+				$num = archive_restore_table($file, "denylist", $flushtables);
+				echo "Processed denylist (exact) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
-			if(isset($_POST["regexlist"]) && $file->getFilename() === "blacklist.regex.json")
+			if(isset($_POST["regexlist"]) && $file->getFilename() === "denylist.regex.json")
 			{
-				$num = archive_restore_table($file, "regex_blacklist", $flushtables);
-				echo "Processed blacklist (regex) (".$num." entries)<br>\n";
+				$num = archive_restore_table($file, "regex_denylist", $flushtables);
+				echo "Processed denylist (regex) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
-			if(isset($_POST["whitelist"]) && $file->getFilename() === "whitelist.exact.json")
+			if(isset($_POST["allowlist"]) && $file->getFilename() === "allowlist.exact.json")
 			{
-				$num = archive_restore_table($file, "whitelist", $flushtables);
-				echo "Processed whitelist (exact) (".$num." entries)<br>\n";
+				$num = archive_restore_table($file, "allowlist", $flushtables);
+				echo "Processed allowlist (exact) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
-			if(isset($_POST["regex_whitelist"]) && $file->getFilename() === "whitelist.regex.json")
+			if(isset($_POST["regex_allowlist"]) && $file->getFilename() === "allowlist.regex.json")
 			{
-				$num = archive_restore_table($file, "regex_whitelist", $flushtables);
-				echo "Processed whitelist (regex) (".$num." entries)<br>\n";
+				$num = archive_restore_table($file, "regex_allowlist", $flushtables);
+				echo "Processed allowlist (regex) (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
@@ -463,12 +463,12 @@ if(isset($_POST["action"]))
 				$importedsomething = true;
 			}
 
-			if((isset($_POST["whitelist"]) || isset($_POST["regex_whitelist"]) ||
-				isset($_POST["blacklist"]) || isset($_POST["regex_blacklist"])) &&
+			if((isset($_POST["allowlist"]) || isset($_POST["regex_allowlist"]) ||
+				isset($_POST["denylist"]) || isset($_POST["regex_denylist"])) &&
 				$file->getFilename() === "domainlist_by_group.json")
 			{
 				$num = archive_restore_table($file, "domainlist_by_group", $flushtables);
-				echo "Processed black-/whitelist group assignments (".$num." entries)<br>\n";
+				echo "Processed black-/allowlist group assignments (".$num." entries)<br>\n";
 				$importedsomething = true;
 			}
 
@@ -578,10 +578,10 @@ else
 		exit("cannot open/create ".htmlentities($archive_file_name)."<br>\nPHP user: ".exec('whoami')."\n");
 	}
 
-	archive_add_table("whitelist.exact.json", "domainlist", ListType::whitelist);
-	archive_add_table("whitelist.regex.json", "domainlist", ListType::regex_whitelist);
-	archive_add_table("blacklist.exact.json", "domainlist", ListType::blacklist);
-	archive_add_table("blacklist.regex.json", "domainlist", ListType::regex_blacklist);
+	archive_add_table("allowlist.exact.json", "domainlist", ListType::allowlist);
+	archive_add_table("allowlist.regex.json", "domainlist", ListType::regex_allowlist);
+	archive_add_table("denylist.exact.json", "domainlist", ListType::denylist);
+	archive_add_table("denylist.regex.json", "domainlist", ListType::regex_denylist);
 	archive_add_table("adlist.json", "adlist");
 	archive_add_table("domain_audit.json", "domain_audit");
 	archive_add_table("group.json", "group");

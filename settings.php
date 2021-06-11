@@ -1344,20 +1344,20 @@ if (isset($_GET['tab']) && in_array($_GET['tab'], array("sysadmin", "adlists", "
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <input type="checkbox" name="whitelist" id="tele_whitelist" value="true" checked>
-                                                    <label for="tele_whitelist">Whitelist (exact)</label>
+                                                    <input type="checkbox" name="allowlist" id="tele_allowlist" value="true" checked>
+                                                    <label for="tele_allowlist">Allowlist (exact)</label>
                                                 </div>
                                                 <div>
-                                                    <input type="checkbox" name="regex_whitelist" id="tele_regex_whitelist" value="true" checked>
-                                                    <label for="tele_regex_whitelist">Whitelist (regex/wildcard)</label>
+                                                    <input type="checkbox" name="regex_allowlist" id="tele_regex_allowlist" value="true" checked>
+                                                    <label for="tele_regex_allowlist">Allowlist (regex/wildcard)</label>
                                                 </div>
                                                 <div>
-                                                    <input type="checkbox" name="blacklist" id="tele_blacklist" value="true" checked>
-                                                    <label for="tele_blacklist">Blacklist (exact)</label>
+                                                    <input type="checkbox" name="denylist" id="tele_denylist" value="true" checked>
+                                                    <label for="tele_denylist">Denylist (exact)</label>
                                                 </div>
                                                 <div>
                                                     <input type="checkbox" name="regexlist" id="tele_regexlist" value="true" checked>
-                                                    <label for="tele_regexlist">Blacklist (regex/wildcard)</label>
+                                                    <label for="tele_regexlist">Denylist (regex/wildcard)</label>
                                                 </div>
                                                 <div>
                                                     <input type="checkbox" name="adlist" id="tele_adlist" value="true" checked>

@@ -147,12 +147,12 @@ While we are primarily reachable on our <a href="https://discourse.pi-hole.net/"
   <img src="https://pi-hole.github.io/graphics/Screenshots/debug.png" alt="Debugger">
 </p>
 
-## Black and white lists
+## Deny and Allow lists
 
 <p align="center">
-  <img src="https://pi-hole.github.io/graphics/Screenshots/blacklist.png" alt="Blacklist">
+  <img src="https://pi-hole.github.io/graphics/Screenshots/denylist.png" alt="Deny list">
   <br><br>
-  <img src="https://pi-hole.github.io/graphics/Screenshots/whitelist.png" alt="Whitelist">
+  <img src="https://pi-hole.github.io/graphics/Screenshots/allowlist.png" alt="Allow list">
 </p>
 
 ## The ability to easily manage and configure Pi-hole features

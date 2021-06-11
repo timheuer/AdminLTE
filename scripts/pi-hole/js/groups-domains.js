@@ -33,7 +33,7 @@ $(function () {
       GETDict[item.split("=")[0]] = item.split("=")[1];
     });
 
-  if ("type" in GETDict && (GETDict.type === "white" || GETDict.type === "black")) {
+  if ("type" in GETDict && (GETDict.type === "allow" || GETDict.type === "deny")) {
     showtype = GETDict.type;
   }
 
@@ -100,34 +100,34 @@ function initTable() {
           "</code>"
       );
 
-      var whitelistOptions = "";
-      if (showtype === "all" || showtype === "white") {
-        whitelistOptions =
+      var allowlistOptions = "";
+      if (showtype === "all" || showtype === "allow") {
+        allowlistOptions =
           '<option value="0"' +
           (data.type === 0 ? " selected" : "") +
-          ">Exact whitelist</option>" +
+          ">Exact allowlist</option>" +
           '<option value="2"' +
           (data.type === 2 ? " selected" : "") +
-          ">Regex whitelist</option>";
+          ">Regex allowlist</option>";
       }
 
-      var blacklistOptions = "";
-      if (showtype === "all" || showtype === "black") {
-        blacklistOptions =
+      var denylistOptions = "";
+      if (showtype === "all" || showtype === "deny") {
+        denylistOptions =
           '<option value="1"' +
           (data.type === 1 ? " selected " : " ") +
-          ">Exact blacklist</option>" +
+          ">Exact denylist</option>" +
           '<option value="3"' +
           (data.type === 3 ? " selected" : "") +
-          ">Regex blacklist</option>";
+          ">Regex denylist</option>";
       }
 
       $("td:eq(1)", row).html(
         '<select id="type_' +
           data.id +
           '" class="form-control">' +
-          whitelistOptions +
-          blacklistOptions +
+          allowlistOptions +
+          denylistOptions +
           "</select>"
       );
       var typeEl = $("#type_" + data.id, row);

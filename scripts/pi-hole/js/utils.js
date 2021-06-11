@@ -268,7 +268,7 @@ function addFromQueryLog(domain, list) {
     return;
   }
 
-  var listtype = list === "white" ? "Whitelist" : "Blacklist";
+  var listtype = list === "allow" ? "Allowlist" : "Denylist";
 
   alProcessing.children(alDomain).text(domain);
   alProcessing.children(alList).text(listtype);
